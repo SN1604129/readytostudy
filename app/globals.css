@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+@theme {
+  /* Core brand palette for education counselling */
+  --color-navy-950: #071A2F;
+  --color-navy-900: #0e1f4b;
+  --color-navy-800: #142a63;
+  --color-navy-700: #1d3e8f;
+  --color-navy-600: #2a4fae;
+  --color-navy-200: #b9c8ec;
+  --color-navy-100: #dbe4f7;
+  --color-navy-50: #eef2fb;
+  --color-gold-500: #D8AA45;
+  --color-gold-400: #e6b95f;
+  --color-gold-100: #f8ecd2;
+  --color-ice: #f3f6fc;
+  --color-ivory: #F7F3EA;
+  --color-sky-500: #55A7C9;
+  --color-sky-100: #ddeef5;
+  --color-badge-red: #e03131;
+  --font-display: "Trebuchet MS", Arial, sans-serif;
+  --font-body: system-ui, "Segoe UI", sans-serif;
+  --font-script: "Brush Script MT", cursive;
+}
+
+html { scroll-behavior: smooth; }
+
+.page-transition { animation: page-enter 0.22s ease-out; }
+@keyframes page-enter {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+
+body {
+  background: var(--color-ice);
+  color: var(--color-navy-900);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display { font-family: var(--font-display); }
+.font-script { font-family: var(--font-script); }
+
+::selection { background: var(--color-gold-400); color: var(--color-navy-900); }
+
+.focus-ring:focus-visible {
+  outline: 3px solid var(--color-gold-500);
+  outline-offset: 2px;
+}
+
+/* ---------------------------------------------------------------
+   Scroll reveal.
+   Content is VISIBLE BY DEFAULT. The hidden state is only applied
+   once the inline reveal script in <head> has confirmed it can run
+   (it adds .reveal-ready to <html>). If JavaScript is disabled,
+   blocked, or throws, every section still renders fully visible.
+   --------------------------------------------------------------- */
+[data-reveal] {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.21, 0.65, 0.36, 1),
+              transform 0.7s cubic-bezier(0.21, 0.65, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.reveal-ready [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-transition { animation: none; }
+  html { scroll-behavior: auto; }
+  .reveal-ready [data-reveal],
+  .reveal-ready [data-reveal].is-visible {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .animate-spin { animation: none !important; }
+}
